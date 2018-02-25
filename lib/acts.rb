@@ -3,22 +3,20 @@ require 'fileutils'
 
 class Acts < Thor
   @@path = File.dirname(__FILE__)
-  @@templates_path = @@path + '/acts/templates'
+  @@new_project_path = @@path + '/acts/new_project'
   @@framework_templates_path = @@path + '/acts/frameworks_templates'
 
   desc 'new <project_name>', 'Create new empty project'
-  method_option :with_rspec,
-                default: false,
-                required: false,
-                desc: "Create necessary files for rspec",
-                aliases: "-trs",
-                type: :boolean
   def new(name)
-    create_file("#{name}/first_file.rb", read_from_file("#{templates_path}/template#1.rb"))
-    create_file("#{name}/folder/second_file.feature", read_from_file("#{templates_path}/template#2.feature"))
-    if options[:with_rspec]
-      create_file("#{name}/rspec/example_spec.rb", read_from_file("#{templates_path}/template#2.rb"))
-    end
+    create_file("#{name}/Gemfile", read_from_file("#{new_project_path}/Gemfile"))
+    create_file("#{name}/Rakefile", read_from_file("#{new_project_path}/Rakefile"))
+    create_file("#{name}/spec/init_utils.rb", read_from_file("#{new_project_path}/spec/init_utils.rb"))
+    create_file("#{name}/spec/spec_helper.rb", read_from_file("#{new_project_path}/spec/spec_helper.rb"))
+    create_file("#{name}/spec/feature/test_autotest_en.feature", read_from_file("#{new_project_path}/spec/feature/test_autotest_en.feature"))
+    create_file("#{name}/spec/feature/test_autotest_ru.feature", read_from_file("#{new_project_path}/spec/feature/test_autotest_ru.feature"))
+    create_file("#{name}/spec/steps/test_autotest_steps_en.rb", read_from_file("#{new_project_path}/spec/steps/test_autotest_steps_en.rb"))
+    create_file("#{name}/spec/steps/test_autotest_steps_ru.rb", read_from_file("#{new_project_path}/spec/steps/test_autotest_steps_ru.rb"))
+    create_file("#{name}/spec/support/test_page.rb", read_from_file("#{new_project_path}/spec/support/test_page.rb"))
     puts("-- Project with name #{name} has been created --")
   end
 
@@ -85,8 +83,8 @@ class Acts < Thor
     steps
   end
 
-  def templates_path
-    @@templates_path
+  def new_project_path
+    @@new_project_path
   end
 
   def framework_templates_path
