@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-ROOT_PATH = "#{__FILE__}".gsub!(/bin\/acts$/, '')
-require "#{ROOT_PATH}/lib/acts.rb"
+require_relative '../lib/acts.rb'
 
-Acts.start(ARGV)
+Acts::Main.start(ARGV)
