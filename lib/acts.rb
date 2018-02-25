@@ -1,11 +1,10 @@
-require "acts/version"
 require 'thor'
 require 'fileutils'
 
 class Acts < Thor
   @@path = File.dirname(__FILE__)
-  @@templates_path = @@path + '/templates'
-  @@framework_templates_path = @@path + '/frameworks_templates'
+  @@templates_path = @@path + '/acts/templates'
+  @@framework_templates_path = @@path + '/acts/frameworks_templates'
 
   desc 'new <project_name>', 'Create new empty project'
   method_option :with_rspec,
